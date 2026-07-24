@@ -12,29 +12,34 @@ struct PlotView: View {
     let potato: Potato?
 
     var body: some View {
-        ZStack {
-            if let potato {
-                Circle()
-                    .fill(potato.color.gradient)
-                    .shadow(color: .black.opacity(0.15), radius: 2, y: 1)
+        // GeometryReader tells us how wide this square ended up, so the
+        // text can scale with it instead of being a fixed size.
+        GeometryReader { geometry in
+            let size = geometry.size.width
 
-                Text(potato.name)
-                    .font(.caption2)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.white)
-                    .shadow(color: .black.opacity(0.4), radius: 1)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.5)
-                    .padding(6)
-            } else {
-                Circle()
-                    .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [4]))
-                    .foregroundStyle(.secondary.opacity(0.4))
+            ZStack {
+                if let potato {
+                    Circle()
+                        .fill(potato.color.gradient)
+                        .shadow(color: .black.opacity(0.15), radius: size * 0.03, y: 1)
 
-                Text("\(plot)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    Text(potato.name)
+                        .font(.system(size: size * 0.19, weight: .semibold))
+                        .foregroundStyle(.white)
+                        .shadow(color: .black.opacity(0.4), radius: 1)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.4)
+                        .padding(size * 0.14)
+                } else {
+                    Circle()
+                        .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [size * 0.05]))
+                        .foregroundStyle(.secondary.opacity(0.4))
+
+                    Text("\(plot)")
+                        .font(.system(size: size * 0.2))
+                        .foregroundStyle(.secondary)
+                }
             }
         }
         .aspectRatio(1, contentMode: .fit)

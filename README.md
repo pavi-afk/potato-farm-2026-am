@@ -10,7 +10,8 @@ planted your potato.
 ## Plant your potato
 
 1. **Fork** this repository, then clone your fork.
-2. Open `potato-farm.xcodeproj` in Xcode and run the app.
+2. Open `potato-farm.xcodeproj` in Xcode and run it on an **iPad** simulator —
+   the farm is iPad-only, so there's room for all 42 plots at once.
 3. Find an empty plot. Empty plots are dashed circles showing their number,
    from 1 to 42, counting left to right and top to bottom.
 4. Open **`potato-farm/Farmers.swift`** — the only file you need to change —
